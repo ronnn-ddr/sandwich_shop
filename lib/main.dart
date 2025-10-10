@@ -91,7 +91,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
+            const Text(
+              'Welcome to my sandwich shop!',
+              style: TextStyle(fontSize: 50),
+            ),
           ],
         ),
       ),
