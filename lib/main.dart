@@ -29,6 +29,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
+  String _notes = '';
 
   void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
@@ -55,6 +56,31 @@ class _OrderScreenState extends State<OrderScreen> {
             OrderItemDisplay(
               _quantity,
               'Footlong',
+              _notes,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                width: 300,
+                child: TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Special Requests',
+                    hintText: 'e.g., no onions, extra pickles',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(() => _notes = value);
+                  },
+                ),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -79,11 +105,24 @@ class _OrderScreenState extends State<OrderScreen> {
 class OrderItemDisplay extends StatelessWidget {
   final int quantity;
   final String itemType;
+  final String notes;
 
-  const OrderItemDisplay(this.quantity, this.itemType, {super.key});
+  const OrderItemDisplay(this.quantity, this.itemType, this.notes, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
+    return Column(
+      children: [
+        Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}'),
+        if (notes.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              'Notes: $notes',
+              style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+      ],
+    );
   }
 }
