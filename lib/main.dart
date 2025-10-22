@@ -30,6 +30,7 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
   String _notes = '';
+  String _selectedSize = 'Footlong';
 
   void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
@@ -55,7 +56,7 @@ class _OrderScreenState extends State<OrderScreen> {
           children: <Widget>[
             OrderItemDisplay(
               _quantity,
-              'Footlong',
+              _selectedSize,
               _notes,
             ),
             Padding(
@@ -85,18 +86,76 @@ class _OrderScreenState extends State<OrderScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: _increaseQuantity,
-                  child: const Text('Add'),
+                Expanded(
+                  child: StyledButton(
+                    onPressed: _quantity < widget.maxQuantity
+                        ? _increaseQuantity
+                        : null,
+                    label: 'Add',
+                    color: Colors.green,
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: _decreaseQuantity,
-                  child: const Text('Remove'),
+                Expanded(
+                  child: StyledButton(
+                    onPressed: _quantity > 0 ? _decreaseQuantity : null,
+                    label: 'Remove',
+                    color: Colors.red,
+                  ),
                 ),
               ],
             ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: SegmentedButton<String>(
+                segments: const [
+                  ButtonSegment<String>(
+                    value: 'Six-inch',
+                    label: Text('Six-inch'),
+                  ),
+                  ButtonSegment<String>(
+                    value: 'Footlong',
+                    label: Text('Footlong'),
+                  ),
+                ],
+                selected: {_selectedSize},
+                onSelectionChanged: (Set<String> newSelection) {
+                  setState(() {
+                    _selectedSize = newSelection.first;
+                  });
+                },
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class StyledButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String label;
+  final Color color;
+
+  const StyledButton({
+    required this.onPressed,
+    required this.label,
+    required this.color,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          foregroundColor: Colors.white,
+        ),
+        child: Text(label),
       ),
     );
   }
