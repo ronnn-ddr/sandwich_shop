@@ -40,6 +40,7 @@ class _OrderScreenState extends State<OrderScreen> {
     if (_quantity > 0) {
       setState(() => _quantity--);
     }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +60,11 @@ class _OrderScreenState extends State<OrderScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    print('Add button pressed!');
-                  },
+                  onPressed: _increaseQuantity,
                   child: const Text('Add'),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    print('Remove button pressed!');
-                  },
+                  onPressed: _decreaseQuantity,
                   child: const Text('Remove'),
                 ),
               ],
@@ -87,14 +84,6 @@ class OrderItemDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 100,
-      alignment: Alignment.center,
-      child: Text(
-        '$quantity $itemType',
-        style: Theme.of(context).textTheme.headlineSmall,
-      ),
-    );
+    return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
   }
 }
