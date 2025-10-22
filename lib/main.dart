@@ -55,13 +55,45 @@ class _OrderScreenState extends State<OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sandwich Counter'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            OrderItemDisplay(
+              _quantity,
+              'Footlong',
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    print('Add button pressed!');
+                  },
+                  child: const Text('Add'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    print('Remove button pressed!');
+                  },
+                  child: const Text('Remove'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
 class OrderItemDisplay extends StatelessWidget {
-  final String itemType;
   final int quantity;
+  final String itemType;
 
   const OrderItemDisplay(this.quantity, this.itemType, {super.key});
 
@@ -71,7 +103,10 @@ class OrderItemDisplay extends StatelessWidget {
       width: 300,
       height: 100,
       alignment: Alignment.center,
-      child: Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}'),
+      child: Text(
+        '$quantity $itemType',
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
     );
   }
 }
