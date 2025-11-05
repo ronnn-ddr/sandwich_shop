@@ -83,6 +83,14 @@ void main() {
     });
   });
 
+  testWidgets('changes bread size with Switch', (WidgetTester tester) async {
+    await tester.pumpWidget(const App());
+    expect(find.textContaining('footlong sandwich'), findsOneWidget);
+    await tester.tap(find.byType(Switch));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('six-inch sandwich'), findsOneWidget);
+  });
+
   group('StyledButton', () {
     testWidgets('renders with icon and label', (WidgetTester tester) async {
       const testButton = StyledButton(
