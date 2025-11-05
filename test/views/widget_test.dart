@@ -86,7 +86,7 @@ void main() {
   testWidgets('changes bread size with Switch', (WidgetTester tester) async {
     await tester.pumpWidget(const App());
     expect(find.textContaining('footlong sandwich'), findsOneWidget);
-    await tester.tap(find.byType(Switch));
+    await tester.tap(find.byKey(const Key('size_switch')));
     await tester.pumpAndSettle();
     expect(find.textContaining('six-inch sandwich'), findsOneWidget);
   });
