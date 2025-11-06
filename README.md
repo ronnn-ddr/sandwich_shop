@@ -4,13 +4,15 @@ A Flutter application for ordering sandwiches with customizable options like siz
 
 ## Description
 
-The Sandwich Shop App allows users to build and order sandwiches by selecting quantity, size (Footlong or Six-inch), bread type (white, wheat, or wholemeal), and adding special notes for requests like "no onions" or "extra pickles". The app features a simple UI with buttons to adjust quantity, a segmented button for size selection, and a text field for notes. It uses state management via an `OrderRepository` to handle order logic.
+The Sandwich Shop App allows users to build and order sandwiches by selecting quantity, size (Footlong or Six-inch), bread type (white, wheat, or wholemeal), and adding special notes for requests like "no onions" or "extra pickles". The app calculates and displays the total price based on selections and features a simple UI with buttons to adjust quantity, switches for size and toasting, a dropdown for bread type, and a text field for notes. It uses state management via `OrderRepository` and `PricingRepository` to handle order logic and pricing.
 
 Key features:
 - Increment/decrement sandwich quantity with boundary checks.
-- Select sandwich size using a SegmentedButton.
-- Choose bread type (enum-based).
+- Select sandwich size using switches (Footlong or Six-inch).
+- Choose bread type from a dropdown menu (white, wheat, or wholemeal).
+- Toggle toasting preference with a switch.
 - Add special requests via a text input field.
+- Calculate and display total order price based on quantity, size, and base pricing.
 - Display current order details in an `OrderItemDisplay` widget.
 - Styled buttons for a consistent UI.
 
@@ -63,12 +65,14 @@ Replace `your-username` with your actual GitHub username or repository URL.
 ## Using the Project
 
 - **Quantity Control**: Use the "Add" and "Remove" buttons to adjust the number of sandwiches (max 10 by default).
-- **Size Selection**: Toggle between "Footlong" and "Six-inch" using the SegmentedButton.
-- **Bread Type**: Select from white, wheat, or wholemeal (currently set via code; can be extended to UI).
+- **Size Selection**: Toggle between "Footlong" and "Six-inch" using the switch.
+- **Bread Type**: Select from white, wheat, or wholemeal using the dropdown menu.
+- **Toasting**: Toggle between toasted and untoasted using the switch.
 - **Special Requests**: Enter notes in the text field (e.g., "no onions, extra pickles").
-- **Order Display**: View the current order in the `OrderItemDisplay` widget, showing quantity, size, and bread type.
+- **Price Display**: View the total price of your order in the `OrderItemDisplay` widget, calculated based on quantity and size.
+- **Order Display**: View the current order details in the `OrderItemDisplay` widget, showing quantity, size, bread type, and notes.
 
-The app uses `OrderRepository` for state management, ensuring quantity changes are validated and persisted.
+The app uses `OrderRepository` for state management and `PricingRepository` for price calculations, ensuring changes are validated and updated in real-time.
 
 ## Running Tests
 
@@ -91,4 +95,5 @@ The project includes widget tests in [`test/views/widget_test.dart`](test/views/
 - [`lib/main.dart`](lib/main.dart ): Main app entry point with `App` and `OrderScreen` widgets.
 - [`lib/views/app_styles.dart`](lib/views/app_styles.dart ): Custom styles for UI elements.
 - [`lib/repositories/order_repository.dart`](lib/repositories/order_repository.dart ): Handles order state and logic.
+- [`lib/repositories/pricing_repository.dart`](lib/repositories/pricing_repository.dart ): Handles pricing calculations for sandwiches.
 - [`test/views/widget_test.dart`](test/views/widget_test.dart ): Widget tests for UI components.
