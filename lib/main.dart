@@ -74,7 +74,9 @@ class _OrderScreenState extends State<OrderScreen> {
       String confirmationMessage =
           'Added $_quantity $sizeText ${sandwich.name} sandwich(es) on ${_selectedBreadType.name} bread to cart';
 
-      debugPrint(confirmationMessage);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(confirmationMessage)),
+      );
     }
   }
 
@@ -191,6 +193,11 @@ class _OrderScreenState extends State<OrderScreen> {
                     );
                   },
                 ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Cart: ${_cart.totalQuantity} sandwiches, Total: £${_cart.totalPrice.toStringAsFixed(2)}',
+                style: normalText,
               ),
               const SizedBox(height: 20),
               DropdownMenu<SandwichType>(

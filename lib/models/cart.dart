@@ -47,4 +47,6 @@ class Cart {
   }
 
   int get itemCount => items.length;
+
+  int get totalQuantity => items.fold(0, (sum, item) => sum + item.quantity);
 }
