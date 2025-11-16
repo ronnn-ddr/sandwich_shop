@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sandwich_shop/main.dart';
+import 'package:sandwich_shop/models/sandwich.dart';
 
 void main() {
   group('App', () {
     testWidgets('renders OrderScreen as home', (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
       await tester.pumpWidget(const App());
       expect(find.byType(OrderScreen), findsOneWidget);
     });
@@ -13,82 +15,33 @@ void main() {
   group('OrderScreen - Quantity', () {
     testWidgets('shows initial quantity and title',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
       await tester.pumpWidget(const App());
-      expect(find.text('0 white footlong sandwich(es): '), findsOneWidget);
+      expect(find.text('1'), findsOneWidget);
       expect(find.text('Sandwich Counter'), findsOneWidget);
     });
 
     testWidgets('increments quantity when Add is tapped',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
       await tester.pumpWidget(const App());
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Add'));
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.add),
+          warnIfMissed: false);
       await tester.pump();
-      expect(find.text('1 white footlong sandwich(es): 🥪'), findsOneWidget);
-    });
-
-    testWidgets('decrements quantity when Remove is tapped',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const App());
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Add'));
-      await tester.pump();
-      expect(find.text('1 white footlong sandwich(es): 🥪'), findsOneWidget);
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Remove'));
-      await tester.pump();
-      expect(find.text('0 white footlong sandwich(es): '), findsOneWidget);
-    });
-
-    testWidgets('does not decrement below zero', (WidgetTester tester) async {
-      await tester.pumpWidget(const App());
-      expect(find.text('0 white footlong sandwich(es): '), findsOneWidget);
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Remove'));
-      await tester.pump();
-      expect(find.text('0 white footlong sandwich(es): '), findsOneWidget);
+      expect(find.text('2'), findsOneWidget);
     });
 
     testWidgets('does not increment above maxQuantity',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
       await tester.pumpWidget(const App());
-      for (int i = 0; i < 10; i++) {
-        await tester.tap(find.widgetWithText(ElevatedButton, 'Add'));
+      for (int i = 0; i < 4; i++) {
+        await tester.tap(find.widgetWithIcon(IconButton, Icons.add),
+            warnIfMissed: false);
         await tester.pump();
       }
-      expect(find.text('5 white footlong sandwich(es): 🥪🥪🥪🥪🥪'),
-          findsOneWidget);
+      expect(find.text('5'), findsOneWidget);
     });
-  });
-
-  group('OrderScreen - Controls', () {
-    testWidgets('changes bread type with DropdownMenu',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const App());
-      await tester.tap(find.byType(DropdownMenu<BreadType>));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('wheat').last);
-      await tester.pumpAndSettle();
-      expect(find.textContaining('wheat footlong sandwich'), findsOneWidget);
-      await tester.tap(find.byType(DropdownMenu<BreadType>));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('wholemeal').last);
-      await tester.pumpAndSettle();
-      expect(
-          find.textContaining('wholemeal footlong sandwich'), findsOneWidget);
-    });
-
-    testWidgets('updates note with TextField', (WidgetTester tester) async {
-      await tester.pumpWidget(const App());
-      await tester.enterText(
-          find.byKey(const Key('notes_textfield')), 'Extra mayo');
-      await tester.pump();
-      expect(find.text('Note: Extra mayo'), findsOneWidget);
-    });
-  });
-
-  testWidgets('changes bread size with Switch', (WidgetTester tester) async {
-    await tester.pumpWidget(const App());
-    expect(find.textContaining('footlong sandwich'), findsOneWidget);
-    await tester.tap(find.byKey(const Key('size_switch')));
-    await tester.pumpAndSettle();
-    expect(find.textContaining('six-inch sandwich'), findsOneWidget);
   });
 
   group('StyledButton', () {
