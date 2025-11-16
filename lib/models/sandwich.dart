@@ -1,3 +1,5 @@
+import '../repositories/pricing_repository.dart';
+
 enum BreadType { white, wheat, wholemeal }
 
 enum SandwichType {
@@ -41,4 +43,7 @@ class Sandwich {
     }
     return 'assets/images/${typeString}_$sizeString.png';
   }
+
+  double get price =>
+      PricingRepository().getSandwichPrice(isFootlong).toDouble();
 }
