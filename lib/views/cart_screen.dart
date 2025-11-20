@@ -32,6 +32,12 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 
+  void _removeItem(CartItem item) {
+    setState(() {
+      widget.cart.removeItem(item);
+    });
+  }
+
   String _getSizeText(bool isFootlong) {
     if (isFootlong) {
       return 'Footlong';
@@ -69,10 +75,26 @@ class _CartScreenState extends State<CartScreen> {
               for (CartItem item in widget.cart.items)
                 Column(
                   children: [
-                    Text(item.sandwich.name, style: heading2),
-                    Text(
-                      '${_getSizeText(item.sandwich.isFootlong)} on ${item.sandwich.breadType.name} bread',
-                      style: normalText,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(item.sandwich.name, style: heading2),
+                              Text(
+                                '${_getSizeText(item.sandwich.isFootlong)} on ${item.sandwich.breadType.name} bread',
+                                style: normalText,
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => _removeItem(item),
+                          icon: const Icon(Icons.delete),
+                        ),
+                      ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
