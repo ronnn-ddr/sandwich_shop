@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sandwich_shop/views/app_styles.dart';
 import 'package:sandwich_shop/views/cart_screen.dart';
+import 'package:sandwich_shop/views/login_screen.dart';
 import 'package:sandwich_shop/models/cart.dart';
 import 'package:sandwich_shop/models/sandwich.dart';
 
@@ -224,6 +225,18 @@ class _OrderScreenState extends State<OrderScreen> {
                 icon: Icons.shopping_cart,
                 label: 'View Cart',
                 backgroundColor: Colors.blue,
+              ),
+              const SizedBox(height: 20),
+              StyledButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  );
+                },
+                icon: Icons.login,
+                label: 'Login',
+                backgroundColor: Colors.purple,
               ),
               const SizedBox(height: 20),
               Text(
