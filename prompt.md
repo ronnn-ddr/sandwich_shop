@@ -44,3 +44,26 @@ Additional requirements:
 - The screen should be responsive and follow Material Design guidelines.
 
 Provide the updated code for `lib/views/login_screen.dart`, any necessary changes to `lib/views/order_screen.dart` for navigation, and ensure the app builds and runs without errors. Include unit tests for the new functionality in `test/views/login_screen_test.dart` if possible. Add brief comments explaining the changes and how they integrate with the existing code.
+
+# Drawer Menu Feature
+
+I have a Flutter app for a sandwich shop. The main entry point is in `lib/main.dart`, which sets up a MaterialApp with the home screen as `OrderScreen(maxQuantity: 5)`. The app has screens like order screen (`lib/views/order_screen.dart`), cart screen (`lib/views/cart_screen.dart`), checkout screen (`lib/views/checkout_screen.dart`), login screen (`lib/views/login_screen.dart`), and about screen (`lib/views/about_screen.dart`). The app uses a Cart model in `lib/models/cart.dart` and has routes defined in `onGenerateRoute` for `/about` and potentially others.
+
+I need to implement a drawer menu to enhance the app's navigation. The drawer should be accessible from all screens and include menu items for navigating to the order screen, about screen, login screen, and any other relevant screens. To make the navigation responsive, on mobile screen widths (e.g., less than 600 pixels), use a standard drawer that slides out from the side. On computer screen widths (e.g., 600 pixels or more), use a persistent sidebar that remains visible alongside the screen content, providing better usability for larger screens.
+
+Key requirements:
+1. **Create AppDrawer Widget**: Develop a reusable `AppDrawer` widget in `lib/widgets/app_drawer.dart` that contains a `Drawer` with a header (e.g., app title) and `ListTile` items for navigation (Order, About, Login). Each item should use `Navigator.pushReplacementNamed` or similar for navigation and close the drawer.
+
+2. **Responsive Navigation**: Use `LayoutBuilder` or `MediaQuery` to detect screen width. For widths < 600px, integrate the `AppDrawer` as a standard drawer in each screen's `Scaffold`. For widths >= 600px, implement a persistent sidebar: Use a `Row` in the `Scaffold` body with the `AppDrawer` (modified to a `Column` without `Drawer` wrapper) on the left and the screen content on the right, taking up a fixed width (e.g., 200 pixels).
+
+3. **Integration with Screens**: Update all screens (`lib/views/order_screen.dart`, `lib/views/cart_screen.dart`, `lib/views/checkout_screen.dart`, `lib/views/login_screen.dart`, `lib/views/about_screen.dart`) to include the responsive navigation. For mobile, add `drawer: const AppDrawer()` to each `Scaffold`. For desktop, wrap the body in a `Row` with the sidebar.
+
+4. **Navigation Handling**: Ensure drawer items close the drawer on mobile and handle navigation correctly. Add routes for `/login` in `lib/main.dart` if not present.
+
+Additional requirements:
+- The drawer/sidebar should have a consistent design with icons for each menu item.
+- Handle edge cases: Ensure the sidebar doesn't interfere with small mobile screens, and the drawer works on all orientations.
+- Integrate seamlessly with existing navigation; for example, preserve the back stack appropriately.
+- Use Flutter widgets like `LayoutBuilder`, `MediaQuery`, and `Row` for responsiveness.
+
+Provide the updated code for `lib/widgets/app_drawer.dart`, changes to all screen files (`lib/views/*.dart`), updates to `lib/main.dart` for routes, and ensure the app builds and runs without errors. Include unit tests for the new functionality in `test/widgets/app_drawer_test.dart` if possible. Add brief comments explaining the changes and how they integrate with the existing code.
