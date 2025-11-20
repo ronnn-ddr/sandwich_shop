@@ -20,6 +20,18 @@ class _CartScreenState extends State<CartScreen> {
     Navigator.pop(context);
   }
 
+  void _increaseQuantity(CartItem item) {
+    setState(() {
+      widget.cart.updateQuantity(item, item.quantity + 1);
+    });
+  }
+
+  void _decreaseQuantity(CartItem item) {
+    setState(() {
+      widget.cart.updateQuantity(item, item.quantity - 1);
+    });
+  }
+
   String _getSizeText(bool isFootlong) {
     if (isFootlong) {
       return 'Footlong';
@@ -62,8 +74,25 @@ class _CartScreenState extends State<CartScreen> {
                       '${_getSizeText(item.sandwich.isFootlong)} on ${item.sandwich.breadType.name} bread',
                       style: normalText,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () => _decreaseQuantity(item),
+                          icon: const Icon(Icons.remove),
+                        ),
+                        Text(
+                          '${item.quantity}',
+                          style: heading2,
+                        ),
+                        IconButton(
+                          onPressed: () => _increaseQuantity(item),
+                          icon: const Icon(Icons.add),
+                        ),
+                      ],
+                    ),
                     Text(
-                      'Qty: ${item.quantity} - £${_getItemPrice(item.sandwich, item.quantity).toStringAsFixed(2)}',
+                      '£${_getItemPrice(item.sandwich, item.quantity).toStringAsFixed(2)}',
                       style: normalText,
                     ),
                     const SizedBox(height: 20),
