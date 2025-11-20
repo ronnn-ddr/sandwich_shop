@@ -3,12 +3,14 @@ import 'app_drawer.dart';
 
 class ResponsiveNavigation extends StatelessWidget {
   final Widget body;
-  final PreferredSizeWidget? appBar;
+  final String? title;
+  final Widget? leadingWidget;
 
   const ResponsiveNavigation({
     super.key,
     required this.body,
-    this.appBar,
+    this.title,
+    this.leadingWidget,
   });
 
   @override
@@ -16,6 +18,12 @@ class ResponsiveNavigation extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesktop = constraints.maxWidth >= 600;
+        final appBar = title != null
+            ? AppBar(
+                leading: isDesktop ? leadingWidget : null,
+                title: Text(title!),
+              )
+            : null;
         if (isDesktop) {
           // Desktop: Persistent sidebar
           return Scaffold(
