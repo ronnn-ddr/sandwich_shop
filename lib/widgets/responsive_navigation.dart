@@ -15,38 +15,35 @@ class ResponsiveNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isDesktop = constraints.maxWidth >= 600;
-        final appBar = title != null
-            ? AppBar(
-                leading: isDesktop ? leadingWidget : null,
-                title: Text(title!),
-              )
-            : null;
-        if (isDesktop) {
-          // Desktop: Persistent sidebar
-          return Scaffold(
-            appBar: appBar,
-            body: Row(
-              children: [
-                SizedBox(
-                  width: 200,
-                  child: const AppDrawer(),
-                ),
-                Expanded(child: body),
-              ],
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isDesktop = screenWidth >= 600;
+    final appBar = title != null
+        ? AppBar(
+            leading: isDesktop ? leadingWidget : null,
+            title: Text(title!),
+          )
+        : null;
+    if (isDesktop) {
+      // Desktop: Persistent sidebar
+      return Scaffold(
+        appBar: appBar,
+        body: Row(
+          children: [
+            SizedBox(
+              width: 200,
+              child: const AppDrawer(),
             ),
-          );
-        } else {
-          // Mobile: Drawer
-          return Scaffold(
-            appBar: appBar,
-            drawer: Drawer(child: const AppDrawer()),
-            body: body,
-          );
-        }
-      },
-    );
+            Expanded(child: body),
+          ],
+        ),
+      );
+    } else {
+      // Mobile: Drawer
+      return Scaffold(
+        appBar: appBar,
+        drawer: const AppDrawer(),
+        body: body,
+      );
+    }
   }
 }
