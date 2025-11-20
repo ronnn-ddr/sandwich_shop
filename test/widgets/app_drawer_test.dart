@@ -6,7 +6,8 @@ import 'package:sandwich_shop/widgets/responsive_navigation.dart';
 void main() {
   group('AppDrawer', () {
     testWidgets('renders header and menu items', (WidgetTester tester) async {
-      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: AppDrawer())));
+      await tester
+          .pumpWidget(const MaterialApp(home: Scaffold(body: AppDrawer())));
 
       expect(find.text('Sandwich Shop'), findsOneWidget);
       expect(find.text('Order'), findsOneWidget);
@@ -32,7 +33,8 @@ void main() {
       expect(find.text('Home'), findsOneWidget);
     });
 
-    testWidgets('tapping About navigates to about', (WidgetTester tester) async {
+    testWidgets('tapping About navigates to about',
+        (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         initialRoute: '/test',
         routes: {
@@ -47,7 +49,8 @@ void main() {
       expect(find.text('About'), findsOneWidget);
     });
 
-    testWidgets('tapping Sign-Up & Login navigates to login', (WidgetTester tester) async {
+    testWidgets('tapping Sign-Up & Login navigates to login',
+        (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         initialRoute: '/test',
         routes: {
@@ -64,7 +67,8 @@ void main() {
   });
 
   group('ResponsiveNavigation', () {
-    testWidgets('shows drawer on mobile (small width)', (WidgetTester tester) async {
+    testWidgets('shows drawer on mobile (small width)',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
@@ -83,7 +87,8 @@ void main() {
       expect(find.text('Test'), findsOneWidget);
     });
 
-    testWidgets('shows sidebar on desktop (large width)', (WidgetTester tester) async {
+    testWidgets('shows sidebar on desktop (large width)',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
@@ -122,7 +127,8 @@ void main() {
       expect(find.byIcon(Icons.menu), findsOneWidget);
     });
 
-    testWidgets('AppBar has leading widget on desktop', (WidgetTester tester) async {
+    testWidgets('AppBar has leading widget on desktop',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
