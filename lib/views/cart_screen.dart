@@ -22,13 +22,15 @@ class _CartScreenState extends State<CartScreen> {
 
   void _increaseQuantity(Sandwich sandwich) {
     setState(() {
-      widget.cart.updateQuantity(sandwich, (widget.cart.items[sandwich] ?? 0) + 1);
+      widget.cart
+          .updateQuantity(sandwich, (widget.cart.items[sandwich] ?? 0) + 1);
     });
   }
 
   void _decreaseQuantity(Sandwich sandwich) {
     setState(() {
-      widget.cart.updateQuantity(sandwich, (widget.cart.items[sandwich] ?? 0) - 1);
+      widget.cart
+          .updateQuantity(sandwich, (widget.cart.items[sandwich] ?? 0) - 1);
     });
   }
 

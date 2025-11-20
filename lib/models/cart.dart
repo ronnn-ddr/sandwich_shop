@@ -19,8 +19,8 @@ class Cart {
     }
   }
 
-  double get totalPrice =>
-      items.entries.fold(0.0, (sum, entry) => sum + (entry.key.price * entry.value));
+  double get totalPrice => items.entries
+      .fold(0.0, (sum, entry) => sum + (entry.key.price * entry.value));
 
   void clear() {
     items.clear();
