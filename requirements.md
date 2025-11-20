@@ -47,3 +47,60 @@ The cart item modification feature allows users to edit the contents of their sh
 - Update total price calculation in real-time.
 - Handle empty cart display and navigation.
 - Ensure the total price and UI update after any changes.
+
+### Feature Requirements Document: Login Screen
+
+#### 1. Feature Description and Purpose
+The login screen feature allows users to sign up for a new account or sign in to an existing account in the Flutter sandwich shop app. It provides a form-based interface for entering user details such as name, email, and password, with validation to ensure data integrity. Upon successful submission, the entered details are displayed on the screen for verification. The purpose is to prepare the app for user authentication and personalization, enabling future backend integration for secure account management, order history, and customized experiences, while currently serving as a front-end form handler.
+
+#### 2. User Stories
+##### Sign-Up Process
+- As a new user, I want to enter my name, email, and password to create an account, so that I can register for the sandwich shop app.
+- As a new user, I want validation on my inputs (e.g., email format, non-empty fields), so that I know my information is correct before submitting.
+
+##### Sign-In Process
+- As a returning user, I want to enter my email and password to sign in, so that I can access my account and previous orders.
+- As a returning user, I want validation on my inputs, so that I can correct any mistakes before submitting.
+
+##### Mode Switching and Detail Viewing
+- As a user, I want to toggle between "Sign Up" and "Sign In" modes, so that I can choose the appropriate action based on whether I have an account.
+- As a user, I want to view my entered details (name, email, but not password) after successful submission, so that I can confirm the information is accurate.
+
+##### Navigation
+- As a user, I want a "Back" button to return to the order screen, so that I can continue shopping without signing in if I choose.
+
+#### 3. Acceptance Criteria
+##### UI and Display
+- [ ] The screen has an AppBar with the title "Login".
+- [ ] A toggle button or switch allows switching between "Sign Up" and "Sign In" modes.
+- [ ] In Sign Up mode: Display TextFormField for name, email, and password (obscured).
+- [ ] In Sign In mode: Display TextFormField for email and password (obscured).
+- [ ] After valid submission, display entered details in a Card or ListTile below the form (hide password).
+- [ ] Include a "Back" button to navigate to the order screen.
+- [ ] UI follows Material Design guidelines and is responsive.
+
+##### Functionality
+- [ ] Form uses GlobalKey<FormState> for validation.
+- [ ] Validation: All fields non-empty; email matches standard format.
+- [ ] Submit button validates the form and displays details on success.
+- [ ] Mode switch updates the form fields dynamically without losing state inappropriately.
+- [ ] Navigation integrates with existing app flow (e.g., from order screen via a button).
+
+##### Edge Cases and Error Handling
+- [ ] Show error messages for invalid inputs (e.g., "Please enter a valid email").
+- [ ] Prevent submission if form is invalid.
+- [ ] Handle mode switch gracefully, clearing or preserving relevant fields.
+
+##### Testing and Integration
+- [ ] The app builds and runs without errors after implementation.
+- [ ] Unit tests cover form validation, mode switching, and detail display.
+- [ ] Integrate navigation from order screen (e.g., add a login button).
+
+#### 4. Subtasks
+- Create the login_screen.dart file with Form and TextFormField widgets.
+- Implement mode toggle logic to switch between Sign Up and Sign In.
+- Add form validation for fields.
+- Handle form submission and display entered details.
+- Add navigation back to order screen.
+- Update order_screen.dart to include navigation to login screen.
+- Write unit tests for the new functionality.
