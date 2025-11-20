@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sandwich_shop/views/order_screen.dart';
 import 'package:sandwich_shop/views/about_screen.dart';
+import 'package:sandwich_shop/views/login_screen.dart';
 
 void main() {
   runApp(const App());
@@ -18,6 +19,8 @@ class App extends StatelessWidget {
         switch (settings.name) {
           case '/about':
             return MaterialPageRoute(builder: (_) => const AboutScreen());
+          case '/login':
+            return MaterialPageRoute(builder: (_) => const LoginScreen());
           default:
             return MaterialPageRoute(
                 builder: (_) => const OrderScreen(maxQuantity: 5));

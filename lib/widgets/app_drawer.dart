@@ -18,7 +18,10 @@ class AppDrawer extends StatelessWidget {
           leading: const Icon(Icons.home),
           title: const Text('Order'),
           onTap: () {
-            Navigator.of(context).pop(); // Close drawer if open
+            final scaffoldState = Scaffold.of(context);
+            if (scaffoldState.isDrawerOpen) {
+              Navigator.of(context).pop();
+            }
             Navigator.pushReplacementNamed(context, '/');
           },
         ),
@@ -26,15 +29,21 @@ class AppDrawer extends StatelessWidget {
           leading: const Icon(Icons.info),
           title: const Text('About'),
           onTap: () {
-            Navigator.of(context).pop();
+            final scaffoldState = Scaffold.of(context);
+            if (scaffoldState.isDrawerOpen) {
+              Navigator.of(context).pop();
+            }
             Navigator.pushReplacementNamed(context, '/about');
           },
         ),
         ListTile(
           leading: const Icon(Icons.login),
-          title: const Text('Login'),
+          title: const Text('Sign-Up & Login'),
           onTap: () {
-            Navigator.of(context).pop();
+            final scaffoldState = Scaffold.of(context);
+            if (scaffoldState.isDrawerOpen) {
+              Navigator.of(context).pop();
+            }
             Navigator.pushNamed(context, '/login');
           },
         ),
