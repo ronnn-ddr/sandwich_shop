@@ -72,66 +72,86 @@ class _CartScreenState extends State<CartScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 20),
-              for (CartItem item in widget.cart.items)
+              if (widget.cart.items.isEmpty)
                 Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(item.sandwich.name, style: heading2),
-                              Text(
-                                '${_getSizeText(item.sandwich.isFootlong)} on ${item.sandwich.breadType.name} bread',
-                                style: normalText,
-                              ),
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () => _removeItem(item),
-                          icon: const Icon(Icons.delete),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () => _decreaseQuantity(item),
-                          icon: const Icon(Icons.remove),
-                        ),
-                        Text(
-                          '${item.quantity}',
-                          style: heading2,
-                        ),
-                        IconButton(
-                          onPressed: () => _increaseQuantity(item),
-                          icon: const Icon(Icons.add),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      '£${_getItemPrice(item.sandwich, item.quantity).toStringAsFixed(2)}',
-                      style: normalText,
+                    const Text(
+                      'Your cart is empty',
+                      style: heading2,
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),
+                    StyledButton(
+                      onPressed: _goBack,
+                      icon: Icons.shopping_cart,
+                      label: 'Start Ordering',
+                      backgroundColor: Colors.green,
+                    ),
                   ],
-                ),
-              Text(
-                'Total: £${widget.cart.totalPrice.toStringAsFixed(2)}',
-                style: heading2,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              StyledButton(
-                onPressed: _goBack,
-                icon: Icons.arrow_back,
-                label: 'Back to Order',
-                backgroundColor: Colors.grey,
-              ),
+                )
+              else
+                ...[
+                  for (CartItem item in widget.cart.items)
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(item.sandwich.name, style: heading2),
+                                  Text(
+                                    '${_getSizeText(item.sandwich.isFootlong)} on ${item.sandwich.breadType.name} bread',
+                                    style: normalText,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => _removeItem(item),
+                              icon: const Icon(Icons.delete),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () => _decreaseQuantity(item),
+                              icon: const Icon(Icons.remove),
+                            ),
+                            Text(
+                              '${item.quantity}',
+                              style: heading2,
+                            ),
+                            IconButton(
+                              onPressed: () => _increaseQuantity(item),
+                              icon: const Icon(Icons.add),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          '£${_getItemPrice(item.sandwich, item.quantity).toStringAsFixed(2)}',
+                          style: normalText,
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  Text(
+                    'Total: £${widget.cart.totalPrice.toStringAsFixed(2)}',
+                    style: heading2,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  StyledButton(
+                    onPressed: _goBack,
+                    icon: Icons.arrow_back,
+                    label: 'Back to Order',
+                    backgroundColor: Colors.grey,
+                  ),
+                ],
               const SizedBox(height: 20),
             ],
           ),
