@@ -22,6 +22,8 @@ The cart item modification feature allows users to edit the contents of their sh
 - [ ] Each item has + and - buttons for quantity adjustment.
 - [ ] Each item has a remove button (e.g., trash icon) that deletes the item when tapped.
 - [ ] The UI uses ListView.builder for item display and refreshes immediately without errors.
+- [ ] Center the bread type text for each cart item.
+- [ ] Position the delete button next to the item price.
 
 ##### Functionality
 - [ ] Tapping + increases quantity by 1, updates the Cart model, recalculates the total price, and refreshes the UI.

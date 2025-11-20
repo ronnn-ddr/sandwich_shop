@@ -98,19 +98,16 @@ class _CartScreenState extends State<CartScreen> {
                         children: [
                           Expanded(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(item.sandwich.name, style: heading2),
                                 Text(
                                   '${_getSizeText(item.sandwich.isFootlong)} on ${item.sandwich.breadType.name} bread',
                                   style: normalText,
+                                  textAlign: TextAlign.center,
                                 ),
                               ],
                             ),
-                          ),
-                          IconButton(
-                            onPressed: () => _removeItem(item),
-                            icon: const Icon(Icons.delete),
                           ),
                         ],
                       ),
@@ -131,9 +128,18 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ],
                       ),
-                      Text(
-                        '£${_getItemPrice(item.sandwich, item.quantity).toStringAsFixed(2)}',
-                        style: normalText,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '£${_getItemPrice(item.sandwich, item.quantity).toStringAsFixed(2)}',
+                            style: normalText,
+                          ),
+                          IconButton(
+                            onPressed: () => _removeItem(item),
+                            icon: const Icon(Icons.delete),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 20),
                     ],
