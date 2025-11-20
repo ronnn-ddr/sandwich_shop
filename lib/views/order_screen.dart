@@ -124,7 +124,7 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveNavigation(
-      title: 'Sandwich Counter',
+      title: 'Sandwich Shop App',
       leadingWidget: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(

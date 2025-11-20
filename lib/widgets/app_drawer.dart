@@ -7,13 +7,6 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const DrawerHeader(
-          decoration: BoxDecoration(color: Colors.blue),
-          child: Text(
-            'Sandwich Shop',
-            style: TextStyle(color: Colors.white, fontSize: 24),
-          ),
-        ),
         ListTile(
           leading: const Icon(Icons.home),
           title: const Text('Order'),

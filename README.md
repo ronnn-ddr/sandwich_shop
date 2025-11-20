@@ -1,10 +1,12 @@
 # Sandwich Shop App
 
-A Flutter application for ordering sandwiches with customizable options like size, bread type, and special requests.
+A Flutter application for ordering sandwiches with customizable options like size, bread type, and special requests, featuring responsive navigation.
 
 ## Description
 
 The Sandwich Shop App allows users to build and order sandwiches by selecting quantity, size (Footlong or Six-inch), bread type (white, wheat, or wholemeal), and adding special notes for requests like "no onions" or "extra pickles". The app calculates and displays the total price based on selections and features a simple UI with buttons to adjust quantity, switches for size and toasting, a dropdown for bread type, and a text field for notes. It uses state management via `OrderRepository` and `PricingRepository` to handle order logic and pricing.
+
+The app features responsive navigation with a sliding drawer on mobile devices and a persistent sidebar on desktop screens. The navigation menu provides easy access to Order, About, and Sign-Up & Login screens.
 
 Key features:
 - Increment/decrement sandwich quantity with boundary checks.
@@ -15,6 +17,8 @@ Key features:
 - Calculate and display total order price based on quantity, size, and base pricing.
 - Display current order details in an `OrderItemDisplay` widget.
 - Styled buttons for a consistent UI.
+- Responsive navigation with drawer (mobile) and sidebar (desktop).
+- Clean navigation menu without header styling.
 
 ## Prerequisites
 

@@ -5,11 +5,10 @@ import 'package:sandwich_shop/widgets/responsive_navigation.dart';
 
 void main() {
   group('AppDrawer', () {
-    testWidgets('renders header and menu items', (WidgetTester tester) async {
+    testWidgets('renders menu items', (WidgetTester tester) async {
       await tester
           .pumpWidget(const MaterialApp(home: Scaffold(body: AppDrawer())));
 
-      expect(find.text('Sandwich Shop'), findsOneWidget);
       expect(find.text('Order'), findsOneWidget);
       expect(find.text('About'), findsOneWidget);
       expect(find.text('Sign-Up & Login'), findsOneWidget);

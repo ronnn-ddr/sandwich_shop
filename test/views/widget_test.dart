@@ -18,7 +18,7 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(800, 1200));
       await tester.pumpWidget(const App());
       expect(find.text('1'), findsOneWidget);
-      expect(find.text('Sandwich Counter'), findsOneWidget);
+      expect(find.text('Sandwich Shop App'), findsOneWidget);
     });
 
     testWidgets('increments quantity when Add is tapped',
