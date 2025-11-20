@@ -231,7 +231,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
                   );
                 },
                 icon: Icons.login,
