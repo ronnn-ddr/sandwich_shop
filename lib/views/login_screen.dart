@@ -16,6 +16,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  // Submitted details
+  String? _submittedName;
+  String? _submittedEmail;
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -109,10 +113,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Handle submission
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Form submitted')),
-                    );
+                    // Handle submission: set submitted details
+                    setState(() {
+                      _submittedName = _isSignUp ? _nameController.text : null;
+                      _submittedEmail = _emailController.text;
+                    });
                   }
                 },
                 child: Text(_isSignUp ? 'Sign Up' : 'Sign In'),
@@ -125,6 +130,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: const Text('Back'),
               ),
+              const SizedBox(height: 20),
+              // Display submitted details
+              if (_submittedEmail != null)
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Submitted Details:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10),
+                        if (_submittedName != null)
+                          Text('Name: $_submittedName'),
+                        Text('Email: $_submittedEmail'),
+                      ],
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
