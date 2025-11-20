@@ -5,4 +5,8 @@ class PricingRepository {
     int breadPrice = isFootlong ? 11 : 7;
     return basePrice + breadPrice;
   }
+
+  double calculatePrice({required int quantity, required bool isFootlong}) {
+    return getSandwichPrice(isFootlong) * quantity.toDouble();
+  }
 }

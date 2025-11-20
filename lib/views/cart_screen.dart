@@ -20,21 +20,21 @@ class _CartScreenState extends State<CartScreen> {
     Navigator.pop(context);
   }
 
-  void _increaseQuantity(CartItem item) {
+  void _increaseQuantity(Sandwich sandwich) {
     setState(() {
-      widget.cart.updateQuantity(item, item.quantity + 1);
+      widget.cart.updateQuantity(sandwich, (widget.cart.items[sandwich] ?? 0) + 1);
     });
   }
 
-  void _decreaseQuantity(CartItem item) {
+  void _decreaseQuantity(Sandwich sandwich) {
     setState(() {
-      widget.cart.updateQuantity(item, item.quantity - 1);
+      widget.cart.updateQuantity(sandwich, (widget.cart.items[sandwich] ?? 0) - 1);
     });
   }
 
-  void _removeItem(CartItem item) {
+  void _removeItem(Sandwich sandwich) {
     setState(() {
-      widget.cart.removeItem(item);
+      widget.cart.removeItem(sandwich);
     });
   }
 
@@ -90,7 +90,7 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 )
               else ...[
-                for (CartItem item in widget.cart.items)
+                for (var entry in widget.cart.items.entries)
                   Column(
                     children: [
                       Row(
@@ -100,9 +100,9 @@ class _CartScreenState extends State<CartScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(item.sandwich.name, style: heading2),
+                                Text(entry.key.name, style: heading2),
                                 Text(
-                                  '${_getSizeText(item.sandwich.isFootlong)} on ${item.sandwich.breadType.name} bread',
+                                  '${_getSizeText(entry.key.isFootlong)} on ${entry.key.breadType.name} bread',
                                   style: normalText,
                                   textAlign: TextAlign.center,
                                 ),
@@ -115,15 +115,15 @@ class _CartScreenState extends State<CartScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed: () => _decreaseQuantity(item),
+                            onPressed: () => _decreaseQuantity(entry.key),
                             icon: const Icon(Icons.remove),
                           ),
                           Text(
-                            '${item.quantity}',
+                            '${entry.value}',
                             style: heading2,
                           ),
                           IconButton(
-                            onPressed: () => _increaseQuantity(item),
+                            onPressed: () => _increaseQuantity(entry.key),
                             icon: const Icon(Icons.add),
                           ),
                         ],
@@ -132,11 +132,11 @@ class _CartScreenState extends State<CartScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '£${_getItemPrice(item.sandwich, item.quantity).toStringAsFixed(2)}',
+                            '£${_getItemPrice(entry.key, entry.value).toStringAsFixed(2)}',
                             style: normalText,
                           ),
                           IconButton(
-                            onPressed: () => _removeItem(item),
+                            onPressed: () => _removeItem(entry.key),
                             icon: const Icon(Icons.delete),
                           ),
                         ],

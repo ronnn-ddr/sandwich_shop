@@ -1,46 +1,26 @@
 import 'sandwich.dart';
 
-class CartItem {
-  final Sandwich sandwich;
-  int quantity;
-
-  CartItem(this.sandwich, this.quantity);
-
-  double get totalPrice => sandwich.price * quantity;
-}
-
 class Cart {
-  final List<CartItem> items = [];
+  final Map<Sandwich, int> items = {};
 
   void addItem(Sandwich sandwich, {int quantity = 1}) {
-    CartItem? existingItem;
-    for (var item in items) {
-      if (item.sandwich == sandwich) {
-        existingItem = item;
-        break;
-      }
-    }
-    if (existingItem != null) {
-      existingItem.quantity += quantity;
-    } else {
-      items.add(CartItem(sandwich, quantity));
-    }
+    items[sandwich] = (items[sandwich] ?? 0) + quantity;
   }
 
-  void removeItem(CartItem item) {
-    items.remove(item);
+  void removeItem(Sandwich sandwich) {
+    items.remove(sandwich);
   }
 
-  void updateQuantity(CartItem item, int newQuantity) {
+  void updateQuantity(Sandwich sandwich, int newQuantity) {
     if (newQuantity <= 0) {
-      removeItem(item);
+      removeItem(sandwich);
     } else {
-      item.quantity = newQuantity;
+      items[sandwich] = newQuantity;
     }
   }
 
   double get totalPrice =>
-      items.fold(0.0, (sum, item) => sum + item.totalPrice);
+      items.entries.fold(0.0, (sum, entry) => sum + (entry.key.price * entry.value));
 
   void clear() {
     items.clear();
@@ -48,5 +28,7 @@ class Cart {
 
   int get itemCount => items.length;
 
-  int get totalQuantity => items.fold(0, (sum, item) => sum + item.quantity);
+  int get totalQuantity => items.values.fold(0, (sum, qty) => sum + qty);
+
+  int get countOfItems => itemCount;
 }
