@@ -89,6 +89,10 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
+  String _getToastText(bool isToasted) {
+    return isToasted ? 'toasted' : 'untoasted';
+  }
+
   double _getItemPrice(Sandwich sandwich, int quantity) {
     return sandwich.price * quantity;
   }
@@ -140,7 +144,7 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Text(entry.key.name, style: heading2),
                                 Text(
-                                  '${_getSizeText(entry.key.isFootlong)} on ${entry.key.breadType.name} bread',
+                                  '${_getSizeText(entry.key.isFootlong)} ${_getToastText(entry.key.isToasted)} on ${entry.key.breadType.name} bread',
                                   style: normalText,
                                   textAlign: TextAlign.center,
                                 ),

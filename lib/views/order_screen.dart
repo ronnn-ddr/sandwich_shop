@@ -47,6 +47,7 @@ class _OrderScreenState extends State<OrderScreen> {
         type: _selectedSandwichType,
         isFootlong: _isFootlong,
         breadType: _selectedBreadType,
+        isToasted: _isToasted,
       );
 
       setState(() {
@@ -59,8 +60,9 @@ class _OrderScreenState extends State<OrderScreen> {
       } else {
         sizeText = 'six-inch';
       }
+      String toastText = _isToasted ? 'toasted' : 'untoasted';
       String confirmationMessage =
-          'Added $_quantity $sizeText ${sandwich.name} sandwich(es) on ${_selectedBreadType.name} bread to cart';
+          'Added $_quantity $sizeText $toastText ${sandwich.name} sandwich(es) on ${_selectedBreadType.name} bread to cart';
 
       ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(context);
       SnackBar snackBar = SnackBar(

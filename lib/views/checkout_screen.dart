@@ -43,6 +43,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     }
   }
 
+  String _getSizeText(bool isFootlong) {
+    if (isFootlong) {
+      return 'Footlong';
+    } else {
+      return 'Six-inch';
+    }
+  }
+
+  String _getToastText(bool isToasted) {
+    return isToasted ? 'toasted' : 'untoasted';
+  }
+
   double _calculateItemPrice(Sandwich sandwich, int quantity) {
     PricingRepository repo = PricingRepository();
     return repo.calculatePrice(
@@ -64,9 +76,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       final Widget itemRow = Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '${quantity}x ${sandwich.name}',
-            style: normalText,
+          Expanded(
+            child: Text(
+              '${quantity}x ${sandwich.name} (${_getSizeText(sandwich.isFootlong)} ${_getToastText(sandwich.isToasted)} on ${sandwich.breadType.name})',
+              style: normalText,
+            ),
           ),
           Text(
             '£${itemPrice.toStringAsFixed(2)}',
