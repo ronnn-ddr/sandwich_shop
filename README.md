@@ -33,17 +33,16 @@ Before running the app, ensure you have the following installed:
 Clone the project from your Git repository:
 
 ```bash
-git clone https://github.com/your-username/sandwich-shop-app.git
-cd sandwich-shop-app
+git clone https://github.com/ronnn-ddr/sandwich_shop.git
+cd sandwich_shop
 ```
 
-Replace `your-username` with your actual GitHub username or repository URL.
 
 ## Installation
 
 1. Navigate to the project directory:
    ```bash
-   cd sandwich-shop-app
+   cd sandwich_shop
    ```
 
 2. Install dependencies:
@@ -87,12 +86,7 @@ The project includes widget tests in [`test/views/widget_test.dart`](test/views/
    flutter test
    ```
 
-2. Run tests with coverage (optional):
-   ```bash
-   flutter test --coverage
-   ```
-
-   Tests cover scenarios like initial quantity display, increment/decrement, boundary checks, and widget rendering.
+   Tests cover scenarios like initial quantity display, increment/decrement, switches, boundary checks, and widget rendering.
 
 ## Project Structure
 
