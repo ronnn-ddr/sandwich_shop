@@ -23,6 +23,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
   SandwichType _selectedSandwichType = SandwichType.veggieDelight;
   bool _isFootlong = true;
+  bool _isToasted = false;
   BreadType _selectedBreadType = BreadType.white;
   int _quantity = 1;
 
@@ -169,8 +170,23 @@ class _OrderScreenState extends State<OrderScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const Text('untoasted', style: normalText),
+                  Switch(
+                    key: const Key('toasted_switch'),
+                    value: _isToasted,
+                    onChanged: (value) {
+                      setState(() => _isToasted = value);
+                    },
+                  ),
+                  const Text('toasted', style: normalText),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   const Text('Six-inch', style: normalText),
                   Switch(
+                    key: const Key('size_switch'),
                     value: _isFootlong,
                     onChanged: (value) => setState(() => _isFootlong = value),
                   ),

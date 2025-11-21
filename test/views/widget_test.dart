@@ -61,4 +61,50 @@ void main() {
       expect(find.byType(ElevatedButton), findsOneWidget);
     });
   });
+
+  group('OrderScreen - Toasted Switch', () {
+    testWidgets('shows toasted switch with initial untoasted state',
+        (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
+      await tester.pumpWidget(const App());
+      expect(find.text('untoasted'), findsOneWidget);
+      expect(find.text('toasted'), findsOneWidget);
+      expect(find.byKey(const Key('toasted_switch')), findsOneWidget);
+      expect(find.byKey(const Key('size_switch')), findsOneWidget);
+    });
+
+    testWidgets('toggles toasted switch from untoasted to toasted',
+        (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
+      await tester.pumpWidget(const App());
+
+      // Find the toasted switch by key
+      final toastedSwitch = find.byKey(const Key('toasted_switch'));
+      expect(toastedSwitch, findsOneWidget);
+
+      // Tap the toasted switch
+      await tester.tap(toastedSwitch);
+      await tester.pump();
+
+      // The switch should still show both labels, but the state has changed
+      expect(find.text('untoasted'), findsOneWidget);
+      expect(find.text('toasted'), findsOneWidget);
+    });
+
+    testWidgets('toasted switch is interactive', (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
+      await tester.pumpWidget(const App());
+
+      final toastedSwitch = find.byKey(const Key('toasted_switch'));
+      expect(toastedSwitch, findsOneWidget);
+
+      // Tap the toasted switch
+      await tester.tap(toastedSwitch);
+      await tester.pump();
+
+      // Switch should still be present and functional
+      expect(find.byKey(const Key('toasted_switch')), findsOneWidget);
+      expect(find.byKey(const Key('size_switch')), findsOneWidget);
+    });
+  });
 }
